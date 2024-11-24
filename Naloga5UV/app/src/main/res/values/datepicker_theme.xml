@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize DatePicker colors -->
+        <item name="colorAccent">@color/teal_700</item> <!-- Grayish color -->
+        <item name="colorControlActivated">@color/teal_700</item> <!-- Grayish color -->
+        <item name="colorControlHighlight">@color/teal_700</item> <!-- Grayish color -->
+    </style>
+</resources>

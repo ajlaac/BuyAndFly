@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string-array name="travelers_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="destination_array">
+        <item>Frankfurt</item>
+        <item>Paris</item>
+        <item>London</item>
+        <item>Madrid</item>
+        <item>Barcelona</item>
+        <item>Zurich</item>
+        <item>Vienna</item>
+        <item>Amsterdam</item>
+        <item>Skopje</item>
+        <item>Moscow</item>
+    </string-array>
+
+    <string-array name="class_array">
+        <item>Economy</item>
+        <item>Business</item>
+        <item>First</item>
+    </string-array>
+</resources>
