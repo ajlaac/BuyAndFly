@@ -7,44 +7,56 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.lifecycle.ViewModelProvider;
 
 public class SignupActivity extends AppCompatActivity {
+
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button signupButton;
+    private AppViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        signupButton = findViewById(R.id.navigationButton);
 
-        // For the signup button to switch to LoginActivity
-        Button navigationButton = findViewById(R.id.navigationButton);
+        // Initialize ViewModel
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
-        navigationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-                String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-                String confirmPassword = ((EditText) findViewById(R.id.confirmPasswordEditText)).getText().toString();
+        signupButton.setOnClickListener(v -> handleSignup());
+    }
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-                    Toast.makeText(SignupActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else if (!password.equals(confirmPassword)) {
-                    Toast.makeText(SignupActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                } else {
-                    SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(email, password);
-                    editor.apply();
-                    Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                }
+    private void handleSignup() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if user already exists
+        viewModel.getUserByEmail(email).observe(this, existingUser -> {
+            if (existingUser != null) {
+                Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
+            } else {
+                // Insert new user
+                User newUser = new User();
+                newUser.setEmail(email);
+                newUser.setPassword(password);
+                viewModel.insertUser(newUser);
+
+                Toast.makeText(this, "Signup successful", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

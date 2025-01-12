@@ -13,12 +13,12 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Number of Travelers:" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="From:"/>
 
         <Spinner
-                android:id="@+id/spinner_travelers"
+                android:id="@+id/spinner_from"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp" /> <!-- Add bottom margin to create space -->
@@ -44,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/CustomDatePickerTheme"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

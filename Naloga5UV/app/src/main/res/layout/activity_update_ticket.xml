@@ -1,0 +1,72 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Ticket"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingBottom="16dp" />
+
+    <EditText
+            android:id="@+id/update_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From Destination"
+            android:inputType="text" />
+
+    <EditText
+            android:id="@+id/update_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To Destination"
+            android:inputType="text" />
+
+    <EditText
+            android:id="@+id/update_departure_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Departure Date (YYYY-MM-DD)"
+            android:inputType="date" />
+
+    <EditText
+            android:id="@+id/update_return_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Return Date (YYYY-MM-DD)"
+            android:inputType="date" />
+
+    <EditText
+            android:id="@+id/update_class_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Class Type (Economy/Business)"
+            android:inputType="text" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="16dp">
+
+        <Button
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginEnd="8dp" />
+
+        <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+    </LinearLayout>
+</LinearLayout>

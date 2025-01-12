@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // For the login button to switch to LoginActivity
-        Button loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.navigationButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

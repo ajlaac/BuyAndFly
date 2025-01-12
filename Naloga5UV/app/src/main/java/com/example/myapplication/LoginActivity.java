@@ -13,39 +13,50 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+    private AppViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // To make the logo look like it's breathing
-        ImageView rectangleBackground = findViewById(R.id.rectangleBackground);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        loginButton = findViewById(R.id.navigationButton);
 
-        // For the login button to switch to LoginActivity
-        Button navigationButton = findViewById(R.id.navigationButton);
+        // Initialize ViewModel
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
-        navigationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-                String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+        loginButton.setOnClickListener(v -> handleLogin());
+    }
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    SharedPreferences preferences = getSharedPreferences("MyApp", MODE_PRIVATE);
-                    String storedPassword = preferences.getString(email, null);
+    private void handleLogin() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
 
-                    if (storedPassword != null && storedPassword.equals(password)) {
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-                    }
-                }
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Fetch user from database
+        viewModel.getUserByEmail(email).observe(this, user -> {
+            if (user == null) {
+                Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show();
+            } else if (!user.getPassword().equals(password)) {
+                Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+            } else {
+                // Successful login
+                Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
