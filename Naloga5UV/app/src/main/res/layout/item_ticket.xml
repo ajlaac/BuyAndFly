@@ -32,11 +32,37 @@
             android:textSize="14sp" />
 
     <TextView
+            android:id="@+id/dateReturnTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:visibility="gone"
+            android:textSize="14sp" />
+
+    <TextView
             android:id="@+id/classTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Class"
             android:textSize="14sp" />
+
+    <TextView
+            android:id="@+id/weatherTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather: Loading..."
+            android:padding="4dp"
+            android:textSize="14sp" />
+
+    <TextView
+            android:id="@+id/weatherToTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather: Loading..."
+            android:padding="4dp"
+            android:visibility="gone"
+            android:textSize="14sp" />
+
 
     <!-- Horizontal layout for buttons -->
     <LinearLayout

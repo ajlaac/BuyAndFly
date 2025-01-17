@@ -16,6 +16,7 @@ public class PlaneTicket {
     private String returnDate;
     private String classType;
     private boolean isRoundTrip;
+    private String userEmail;
 
     // Getters and Setters
     public int getId() {
@@ -72,6 +73,14 @@ public class PlaneTicket {
 
     public void setRoundTrip(boolean roundTrip) {
         isRoundTrip = roundTrip;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
 

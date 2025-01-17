@@ -27,4 +27,7 @@ public interface PlaneTicketDao {
 
     @Query("SELECT * FROM plane_tickets WHERE departureDate = :departureDate")
     List<PlaneTicket> getTicketsByDepartureDate(String departureDate);
+
+    @Query("SELECT * FROM plane_tickets WHERE userEmail = :email AND (departureDate >= :currentDate OR returnDate >= :currentDate)")
+    List<PlaneTicket> getUserFutureTickets(String email, String currentDate);
 }

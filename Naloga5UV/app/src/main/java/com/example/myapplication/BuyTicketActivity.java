@@ -1,19 +1,13 @@
 package com.example.myapplication;
 
-import android.content.DialogInterface;
+import android.view.View;
 import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 public class BuyTicketActivity extends AppCompatActivity {
@@ -40,6 +34,18 @@ public class BuyTicketActivity extends AppCompatActivity {
         spinner_class = findViewById(R.id.spinner_class);
         check_roundabout = findViewById(R.id.check_roundabout);
         btn_buy_ticket = findViewById(R.id.btn_buy_ticket);
+
+        // Hide return date picker by default
+        date_picker_return.setVisibility(View.GONE);
+
+        // Toggle visibility of return date picker based on checkbox
+        check_roundabout.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                date_picker_return.setVisibility(View.VISIBLE);
+            } else {
+                date_picker_return.setVisibility(View.GONE);
+            }
+        });
 
         // Initialize ViewModel
         viewModel = new ViewModelProvider(this).get(AppViewModel.class);
@@ -70,6 +76,13 @@ public class BuyTicketActivity extends AppCompatActivity {
     }
 
     private void handleBookTicket() {
+        String userEmail = UserSession.getInstance().getLoggedInEmail();
+
+        if (userEmail.isEmpty()) {
+            Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Get selected values
         String from = spinner_from.getSelectedItem().toString();
         String to = spinner_destination.getSelectedItem().toString();
@@ -99,6 +112,7 @@ public class BuyTicketActivity extends AppCompatActivity {
         ticket.setReturnDate(returnDate);
         ticket.setClassType(classType);
         ticket.setRoundTrip(isRoundTrip);
+        ticket.setUserEmail(userEmail);
 
         viewModel.insertTicket(ticket);
         Toast.makeText(this, "Ticket booked successfully!", Toast.LENGTH_SHORT).show();

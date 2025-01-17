@@ -27,4 +27,21 @@
         <item>Business</item>
         <item>First</item>
     </string-array>
+
+    <!-- Array of destinations -->
+    <string-array name="destinations">
+        <item>New York</item>
+        <item>Los Angeles</item>
+        <item>Chicago</item>
+        <item>Miami</item>
+    </string-array>
+
+    <!-- Array of ticket class types -->
+    <string-array name="class_types">
+        <item>Economy</item>
+        <item>Business</item>
+        <item>First Class</item>
+    </string-array>
+
+
 </resources>

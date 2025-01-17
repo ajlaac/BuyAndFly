@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             } else {
                 // Successful login
+                UserSession.getInstance().setLoggedInEmail(email);
                 Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
                 startActivity(intent);
                 finish();
